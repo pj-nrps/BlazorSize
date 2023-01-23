@@ -84,7 +84,11 @@ namespace BlazorPro.BlazorSize
         public async ValueTask DisposeAsync()
         {
             if (MediaQueryList == null) return;
-            await MediaQueryList.RemoveQuery(this);
+            try
+            {
+                await MediaQueryList.RemoveQuery(this);
+            }
+            catch (JSDisconnectedException) { }
         }
     }
 }
